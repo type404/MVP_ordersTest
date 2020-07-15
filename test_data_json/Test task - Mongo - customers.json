@@ -1,0 +1,18 @@
+[
+ {
+   "user_id": "ivan",
+   "login": "ivan",
+   "password": 12345,
+   "name": "Ivan Ivanovich",
+   "company_id": 1,
+   "credit_cards": "[\"*****-1234\", \"*****-5678\"]"
+ },
+ {
+   "user_id": "petr",
+   "login": "petr",
+   "password": 54321,
+   "name": "Petr Petrovich",
+   "company_id": 2,
+   "credit_cards": "[\"*****-4321\", \"*****-8765\"]"
+ }
+]

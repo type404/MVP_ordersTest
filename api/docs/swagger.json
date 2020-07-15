@@ -1,0 +1,261 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "V2X Platform API documentation",
+        "title": "V2X Platform API",
+        "contact": {
+            "name": "Telstra Labs"
+        },
+        "license": {},
+        "version": "0.1"
+    },
+    "host": "localhost",
+    "basePath": "/api/v1",
+    "paths": {
+        "/customers": {
+            "get": {
+                "description": "List all CUSTOMERs",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Infrastructure to Vehicle Information Messages (CUSTOMERs)"
+                ],
+                "summary": "List CUSTOMERs",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "List CUSTOMERs for a geohash",
+                        "name": "geohash",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.CUSTOMERsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete all CUSTOMERs",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Infrastructure to Vehicle Information Messages (CUSTOMERs)"
+                ],
+                "summary": "Delete all CUSTOMERs",
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/customers/{id}": {
+            "get": {
+                "description": "get CUSTOMER by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CUSTOMERs"
+                ],
+                "summary": "Show an CUSTOMER",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "CUSTOMER identifier",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.CUSTOMERResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete by CUSTOMER ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Infrastructure to Vehicle Information Messages (CUSTOMERs)"
+                ],
+                "summary": "Delete an CUSTOMER",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "int64",
+                        "description": "CUSTOMER ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "httputil.HTTPError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status bad request"
+                }
+            }
+        },
+        "model.CUSTOMER": {
+            "type": "object",
+            "properties": {
+                "company_id": {
+                    "type": "integer"
+                },
+                "credit_cards": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.CUSTOMERResponse": {
+            "type": "object",
+            "properties": {
+                "customer": {
+                    "type": "object",
+                    "$ref": "#/definitions/model.CUSTOMER"
+                }
+            }
+        },
+        "model.CUSTOMERsResponse": {
+            "type": "object",
+            "properties": {
+                "customers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.CUSTOMERResponse"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "OAuth2Implicit": {
+            "type": "oauth2",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/a0cd1118-4b02-400d-aed5-560b21ed5a95/oauth2/v2.0/authorize",
+            "scopes": {
+                "api://119805c1-3111-421c-b26e-d2cceb1f406a/files.read": " Grants read files access"
+            }
+        }
+    }
+}

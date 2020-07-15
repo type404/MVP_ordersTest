@@ -1,0 +1,6 @@
+export MONGO_DB_CONN_STR="mongodb://Tisha:1Tisha!@localhost:27017"
+export MONGO_DB_DATABASE="customer_company"
+export MONGO_DB_COLLECTION_CUSTOMER="customer"
+export MONGO_DB_COLL_COMPANY="company"
+export SITE_FILEPATH="./../../frontend/build/"
+export WEBSERVER_PORT=":80"

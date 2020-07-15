@@ -1,0 +1,174 @@
+basePath: /api/v1
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  model.CUSTOMER:
+    properties:
+      company_id:
+        type: integer
+      credit_cards:
+        type: string
+      login:
+        type: string
+      name:
+        type: string
+      password:
+        type: integer
+      user_id:
+        type: string
+    type: object
+  model.CUSTOMERResponse:
+    properties:
+      customer:
+        $ref: '#/definitions/model.CUSTOMER'
+        type: object
+    type: object
+  model.CUSTOMERsResponse:
+    properties:
+      customers:
+        items:
+          $ref: '#/definitions/model.CUSTOMERResponse'
+        type: array
+    type: object
+host: localhost
+info:
+  contact:
+    name: Telstra Labs
+  description: V2X Platform API documentation
+  license: {}
+  title: V2X Platform API
+  version: "0.1"
+paths:
+  /customers:
+    delete:
+      consumes:
+      - application/json
+      description: Delete all CUSTOMERs
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Delete all CUSTOMERs
+      tags:
+      - Infrastructure to Vehicle Information Messages (CUSTOMERs)
+    get:
+      consumes:
+      - application/json
+      description: List all CUSTOMERs
+      parameters:
+      - description: List CUSTOMERs for a geohash
+        in: query
+        name: geohash
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.CUSTOMERsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: List CUSTOMERs
+      tags:
+      - Infrastructure to Vehicle Information Messages (CUSTOMERs)
+  /customers/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete by CUSTOMER ID
+      parameters:
+      - description: CUSTOMER ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Delete an CUSTOMER
+      tags:
+      - Infrastructure to Vehicle Information Messages (CUSTOMERs)
+    get:
+      consumes:
+      - application/json
+      description: get CUSTOMER by ID
+      parameters:
+      - description: CUSTOMER identifier
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.CUSTOMERResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show an CUSTOMER
+      tags:
+      - CUSTOMERs
+securityDefinitions:
+  OAuth2Implicit:
+    authorizationUrl: https://login.microsoftonline.com/a0cd1118-4b02-400d-aed5-560b21ed5a95/oauth2/v2.0/authorize
+    flow: implicit
+    scopes:
+      api://119805c1-3111-421c-b26e-d2cceb1f406a/files.read: ' Grants read files access'
+    type: oauth2
+swagger: "2.0"
